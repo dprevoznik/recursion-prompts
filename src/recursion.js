@@ -404,6 +404,19 @@ var capitalizeWords = function(array) {
 // 28. Given an array of strings, capitalize the first letter of each index.
 // capitalizeFirst(['car','poop','banana']); // ['Car','Poop','Banana']
 var capitalizeFirst = function(array) {
+  if ( array.length === 0 ) { return []; }
+
+  var results = capitalizeFirst(array.slice(0, array.length - 1));
+  
+  var lowerCaseWordArray = array[array.length - 1].toLowerCase().split('');
+  _.each(lowerCaseWordArray, function (value, index) {
+    if (index === 0) {
+      lowerCaseWordArray[0] = value.toUpperCase();
+    }
+  });
+  results.push( lowerCaseWordArray.join("") );
+
+  return results;
 };
 
 // 29. Return the sum of all even numbers in an object containing nested objects.
