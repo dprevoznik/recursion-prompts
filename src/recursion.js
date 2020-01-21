@@ -377,12 +377,28 @@ var fibonacci = function(n) {
 // nthFibo(7); // 13
 // nthFibo(3); // 2
 var nthFibo = function(n) {
+  if ( n < 0 ) { return null; }
+  if ( n === 0 ) { return 0; }
+  if ( n === 1 ) { return 1; }
+
+  return nthFibo(n - 1) + nthFibo(n - 2);
+
 };
 
 // 27. Given an array of words, return a new array containing each word capitalized.
 // var words = ['i', 'am', 'learning', 'recursion'];
 // capitalizedWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
 var capitalizeWords = function(array) {
+  var results = [];
+  if ( array.length === 0 ) { return results; }
+  if ( array.length === 1 ) {
+    results.push( array[array.length - 1].toUpperCase() );
+    return results;
+  }
+
+  results = capitalizeWords(array.slice(0, array.length - 1));
+  results.push( array[array.length - 1].toUpperCase() );
+  return results;
 };
 
 // 28. Given an array of strings, capitalize the first letter of each index.
