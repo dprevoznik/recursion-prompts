@@ -487,12 +487,33 @@ var compress = function(list) {
 // itself.
 // augmentElements([[],[3],[7]], 5); // [[5],[3,5],[7,5]]
 var augmentElements = function(array, aug) {
+  var arrayCopy = [];
+  if (array.length === 1) {
+    arrayCopy.push(array[0]);
+    arrayCopy[0].push(aug);
+    return arrayCopy;
+  }
+
+  arrayCopy = augmentElements(array.slice(1), aug);
+  arrayCopy.unshift(array[0]);
+  arrayCopy[0].push(aug);
+  return arrayCopy;
 };
 
 // 34. Reduce a series of zeroes to a single 0.
 // minimizeZeroes([2,0,0,0,1,4]) // [2,0,1,4]
 // minimizeZeroes([2,0,0,0,1,0,0,4]) // [2,0,1,0,4]
 var minimizeZeroes = function(array) {
+  var output = [];
+  if ( array.length === 1 ) { return array; }
+  
+  output = minimizeZeroes(array.slice(1));
+  if ( array[0] === 0 && array[1] === 0) {
+    output.unshift();
+  } else {
+    output.unshift(array[0]);
+  }
+  return output;
 };
 
 // 35. Alternate the numbers in an array between positive and negative regardless of
@@ -500,6 +521,22 @@ var minimizeZeroes = function(array) {
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
 var alternateSign = function(array) {
+  var output = [];
+  if ( array.length === 0 ) {
+    return output;
+  }
+
+  output = alternateSign(array.slice(0, array.length - 1));
+  if ( array.length % 2 === 1 ) {
+    output.push(Math.abs(array[array.length - 1]));
+  } else {
+    if ( array[array.length - 1] < 0 ) {
+      output.push(array[array.length - 1]);
+    } else {
+      output.push(array[array.length - 1] * -1);
+    }
+  }
+  return output;
 };
 
 // 36. Given a string, return a string with digits converted to their word equivalent.
