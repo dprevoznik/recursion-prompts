@@ -543,6 +543,33 @@ var alternateSign = function(array) {
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
 var numToText = function(str) {
+  var output = '';
+  //if string is empty
+  if (str.length === 0) { return output; }
+  //recurse to zero elements
+  output = numToText(str.slice(0, str.length - 1));
+  if ( str[str.length - 1] === "1" ) {
+    output += "one";
+  } else if ( str[str.length - 1] === "2" ) {
+    output += "two"; 
+  } else if ( str[str.length - 1] === "3" ) {
+    output += "three";
+  } else if ( str[str.length - 1] === "4" ) {
+    output += "four";
+  } else if ( str[str.length - 1] === "5" ) {
+    output += "five";
+  } else if ( str[str.length - 1] === "6" ) {
+    output += "six";
+  } else if ( str[str.length - 1] === "7" ) {
+    output += "seven";
+  } else if ( str[str.length - 1] === "8" ) {
+    output += "eight";
+  } else if ( str[str.length - 1] === "9" ) {
+    output += "nine";
+  } else {
+    output += str[str.length - 1];
+  }
+  return output;
 };
 
 
